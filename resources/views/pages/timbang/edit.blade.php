@@ -27,7 +27,7 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row">
-                          <form action="/timbanglapangan/{{ $timbang->timbangl_id }}" method="POST">
+                          <form action="/timbang/{{ $timbang->timbang_id }}" method="POST">
                             @csrf
                             @method('PUT')  
                               <div class="form-group">
@@ -78,8 +78,24 @@
                                   </div>
                               </div>
                           
-                            
-                     
+                              <div class="form-group">
+                                  <label>Nomor Plat Truk</label>
+                                  <div class="input-group mb-3">
+                                      <select class="form-control"  name="truk_id" id="no_pol">
+                                        <option value="{{ old('truk_id') ? old ('truk_id') : $timbang->truk_id }}">
+                                          {{ $timbang->truk->no_polisi }}
+                                         </option>
+
+                                          @foreach($truk as $item)
+                                                <option value="{{ old('truk_id') ? old ('truk_id') : $item->truk_id }}">
+                                                    {{ $item->no_polisi }}
+                                                </option>
+                                          @endforeach
+                                      </select>
+                                    </div>
+                              </div>
+
+                             
 
                             <div class="col"> 
                               <div class="mb-1">
@@ -94,13 +110,13 @@
                             </div>
 
                             <div class="form-group">
-                              <label>Nama Penimbang</label>
+                              <label>Nama Supir</label>
                               <div class="input-group mb-3">
-                              <input type="text" name="penimbang" id="nama_supir" class="form-control" value="{{ old('penimbang') ? old('penimbang') : $timbang->penimbang }}">  
+                              <input type="text" name="supir" id="nama_supir" class="form-control" value="{{ old('supir') ? old('supir') : $timbang->supir }}">  
                               </div>
                           </div>
                                 <div>
-                                <a href="{{ route('timbanglapangan.index') }}" class="btn btn-secondary">Kembali</a>
+                                <a href="{{ route('timbang.index') }}" class="btn btn-secondary">Kembali</a>
                                    <!-- Button trigger modal -->
                                   <button type="submit" class="btn btn-primary" >
                                     Ubah

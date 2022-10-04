@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('table_timbangpabrik', function (Blueprint $table) {
-            $table->id();
+        Schema::create('table_timbang', function (Blueprint $table) {
+            $table->id('timbang_id');
+            $table->date('tanggal');
+            $table->time('jam');
+            $table->integer('timbang_ke');
             $table->foreignId('afdeling_id');
-            $table->foreignId('truk_id');
-            $table->integer('timbang_1')->nullable();
-            $table->integer('timbang_2')->nullable();
-            $table->integer('timbang_3')->nullable();
-            $table->integer('total_timbang_pabrik');
+            $table->foreignId('truk_id');   
+            $table->integer('berat');
+            $table->string('supir',40);
+            $table->foreignId('timbangl_id');
             $table->timestamps();
         });
     }
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_timbangpabrik');
+        Schema::dropIfExists('table_timbang');
     }
 };

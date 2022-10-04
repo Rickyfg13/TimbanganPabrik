@@ -68,35 +68,45 @@
              
             </ul>
           </li> 
-          
-          <li class="nav-item">
-            <a href="{{route ('timbanglapangan.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-               Timbang Lapangan
-              </p>
-            </a>
-          </li> 
-          
-          <li class="nav-item">
-            <a href="{{route ('timbangpabrik.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                Timbang Pabrik
-              </p>
-            </a>
-          </li> 
-          
 
           <li class="nav-item">
-            <a href="{{route ('hasiltimbang.index') }}" class="nav-link">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Input Timbang
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('timbang.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                   Timbang Pabrik
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('timbanglapangan.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Timbang Lapangan</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li> 
+          
+        
+
+          <li class="nav-item">
+            <a href="{{route ('cetak') }}" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                Laporan Selisih Timbang
               </p>
             </a>
           </li> 
-      <!-- /.sidebar-menu -->
+ 
     </div>
     <!-- /.sidebar -->
   </aside>

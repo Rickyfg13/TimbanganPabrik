@@ -27,68 +27,120 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row">
-                         <form action="{{ route('timbanglapangan.store') }}" method="POST">
-                                @csrf
+                          <form action="{{  route('timbanglapangan.store')  }}" method="POST">
+                              <div class="form-group">
+                                  <label>Tanggal</label>
+                                  <div class="input-group mb-3">
+                                  <input type="date" name="tanggal" id="date" class="form-control">  
+                                  </div>
+                              </div>
+                           
+                              <div class="form-group">
+                                  <label>Jam</label>
+                                  <div class="input-group mb-3">
+                                  <input type="time" name="jam" id="jam" class="form-control">  
+                                  </div>
+                              </div>
+
+                              
+                              <div class="form-group">
+                                <label>Timbang Ke</label>
+                                <div class="input-group mb-3">
+                                  <select name="timbang_ke" class="form-control" id="timbang_ke"  >
+                                    <option selected>Pilih Urutan Timbang</option>  
+                                    <option value="1">1</option>  
+                                    <option value="2">2</option>  
+                                    <option value="3">3</option>  
+                                  </select>  
+                                </div>
+                              </div>
 
                            
+                              <div class="form-group">
+                                <label>Asal Afdeling</label>
+                                <div class="input-group mb-3">
+                                    <select class="form-control" name="afdeling_id"  id="afdeling">
+                                      @foreach($afdeling as $item)
+                                            <option value="{{ old('afdeling_id') ? old ('afdeling_id') : $item->afdeling_id }}">
+                                                {{ $item->nama_afdeling }}
+                                            </option>
+                                      @endforeach
+                                    </select>
+                                  </div>
+                              </div>
                           
-                              <div class="form-group">
-                                  <label>Nomor Polisi Truk</label>
-                                  <div class="input-group mb-3">
-                                      <select class="form-control"  name="truk_id">
-                                        @foreach($truk as $item)
-                                              <option value="{{ old('truk_id') ? old ('truk_id') : $item->truk_id }}">
-                                                  {{ $item->no_polisi }}
-                                              </option>
-                                        @endforeach
-                                      </select>
-                                    </div>
-                              </div>
 
                               <div class="form-group">
-                                  <label>Asal Afdeling</label>
-                                  <div class="input-group mb-3">
-                                      <select class="form-control" name="afdeling_id">
-                                        @foreach($afdeling as $item)
-                                              <option value="{{ old('afdeling_id') ? old ('afdeling_id') : $item->afdeling_id }}">
-                                                  {{ $item->nama_afdeling }}
-                                              </option>
-                                        @endforeach
-                                      </select>
-                                    </div>
+                                <label>Nama Penimbang</label>
+                                <div class="input-group mb-3">
+                                <input type="text" name="penimbang" id="nama_penimbang" class="form-control">  
+                                </div>
                               </div>
-
-                             
 
                             <div class="col"> 
-                                    <div class="mb-1">
-                                    <label class="col-form-label">Timbang 1</label>
-                                    <input type="number" id="a" onkeyup="tambah();" class="form-control" name="timbang_1" style="width: 100px;">
+                              <div class="mb-1">
+                                <label class="col-form-label">Berat</label>
+                                  <div class="row">
+                                    <input type="number" class="form-control" name="berat" style="width: 100px;" id="berat"> 
+                                    <div class="col-6 col-6"  >
+                                        <label class="col-form-label" style="margin-left:80px ;">Kg</label>
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+                                <div>
+                                <a href="{{ route('timbang.index') }}" class="btn btn-secondary">Kembali</a>
+                                   <!-- Button trigger modal -->
+                                  <button type="button" class="btn btn-primary" onclick="cetak()" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Proses
+                                  </button>
+                                </div>
+                     
+                       
+                        </div>               
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                              <div class="modal-header ">
+                                <h5 class="modal-title " id="exampleModalLabel"> 
+                                  <label class="label"> Apakah Data Ini Sudah Benar?</label>
+                                </h5>
+                                
+                              </div>
+                              <div class="modal-body">
+                                <table class="table" >
+                                  <thead class="table">
+                                    <tr >
+                                      <th>Tanggal</th>
+                                      <th>Jam</th>
+                                      <th>Timbang Ke</th>
+                                      <th>Asal Afdeling</th>
+                                      <th>Nama Penimbang</th>
+                                      <th>Berat</th>
+                                    </tr>
+                                  </thead>
+                              
+                                    @csrf
+                                  <tbody>
+                                    <tr>
+                                      <td id="a" name="tanggal" ></td>
+                                      <td id="b" name="jam"></td>
+                                      <td id="c" name="timbang_ke" ></td>
+                                      <td id="d"  name="afdeling_id"></td>
+                                      <td id="e"  name="penimbang"></td>
+                                      <td id="g" name="berat"></td>
+                                    </tr>
+                                  </tbody>
+                                  </table>
                                     </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                              <button type="submit"  class="btn btn-primary">Kirim</button>
+                              </form>
+                              </div>
                             </div>
-                
-                            <div class="col">
-                                <div class="mb-1">
-                                    <label  class="col-form-label">Timbang 2</label>
-                                    <input type="number" id="b" onkeyup="tambah();" class="form-control" name="timbang_2" style="width: 100px;">
-                                   
-                                </div>
-                            </div>
-                
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label  class="col-form-label">Timbang 3</label>
-                                    <input type="number" id="c"  onkeyup="tambah();" class="form-control" name="timbang_3" style="width: 100px;">
-                            </div>
-                            <div class="mb-3">
-                                    <label  class="col-form-label">Hasil</label>
-                                    <input type="number" id="total_timbang_lapangan" onkeyup="tambah();" class="form-control" name="total_timbang_lapangan" readonly>
-                            </div>
-                                <div class="modal-footer">
-                                <a href="{{route ('timbanglapangan.index') }}" class="btn btn-danger">Kembali</a>
-                                    <button type="submit" class="btn btn-primary">Kirim</button>
-                                </div>
-                         </form>
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -102,16 +154,29 @@
 
   
 </div>
-
 <script type="text/javascript" >
-    function tambah() {
-      var timbang_1 = document.getElementById("a").value;
-      var timbang_2 = document.getElementById("b").value;
-      var timbang_3 = document.getElementById("c").value;
-      var total_timbang_lapangan = document.getElementById("total_timbang_lapangan").value;
-      var total_timbang_lapangan = parseInt(timbang_1) + parseInt(timbang_2) + parseInt(timbang_3);
-      document.getElementById("total_timbang_lapangan").value = total_timbang_lapangan;
-    }
+  function cetak() {
+    var tanggal = document.getElementById("date").value;
+    var waktu = document.getElementById("jam").value;
+    var timbang_ke = document.getElementById("timbang_ke").value;
+    var afdeling = document.getElementById("afdeling").value;
+    var nama_penimbang = document.getElementById("nama_penimbang").value;
+    var berat = document.getElementById("berat").value;
+   
+
+    document.getElementById("a").innerHTML=tanggal;
+    document.getElementById("b").innerHTML=waktu;
+    document.getElementById("c").innerHTML=timbang_ke;
+    document.getElementById("d").innerHTML=afdeling;
+    document.getElementById("e").innerHTML=nama_penimbang;
+   
+    document.getElementById("g").innerHTML=berat;
+   
+
+
+
+    
+  }
 </script>
 
 @endsection

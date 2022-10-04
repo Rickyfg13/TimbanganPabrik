@@ -42,13 +42,10 @@
                     <div class="mb-3">
                       <label  class="col-form-label">Jenis Truk :</label>
                       <select class="form-control" name="jenis_truk">
-                      
                        <option> Colt Diesel PS 120 </option>
                        <option> Toyota Ps  115</option>
-                       <option> Toyota Dyna 110 PS 
-                      </option>
-                       <option> Isuzu 
-                      </option>
+                       <option> Toyota Dyna 110 PS</option>
+                       <option> Isuzu </option>
                       </select>
                     </div>
 
@@ -82,7 +79,7 @@
                           <th >NO</th>
                           <th>Nomor Polisi</th>
                           <th>Jenis Truk</th>
-                          <th>Sopir</th>
+                          <th>Sopir Utama</th>
                           <th>Status Truk</th>
                           <th>Aksi</th>
                         </tr>
@@ -115,7 +112,7 @@
                                       </div>
                                       <div class="modal-body">
                       
-                                        <form action="/truk/{{ $item->id }}" method="POST">
+                                        <form action="/truk/{{ $item->truk_id }}" method="POST">
                                           @csrf
                                           @method("delete")
                                           Apakah Anda Yakin?

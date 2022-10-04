@@ -18,5 +18,11 @@ class Truk extends Model
         'sopir',
         'status',
     ];  
+
+
+    public function truk()
+    {
+        return $this->hasMany(Timbang::class,'truk_id','timbang_id');
+    }
 }
    

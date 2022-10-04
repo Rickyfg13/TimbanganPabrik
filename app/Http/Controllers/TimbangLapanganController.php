@@ -16,8 +16,8 @@ class TimbangLapanganController extends Controller
      */
     public function index()
     {
-        $list=TimbangLapangan::paginate(10);
-        return view('pages.timbanglapangan.index',compact('list'));
+        $listi=TimbangLapangan::with('truk','afdeling')->paginate(10);
+        return view('pages.timbanglapangan.index',compact('listi'));
     }
 
     /**
@@ -27,7 +27,6 @@ class TimbangLapanganController extends Controller
      */
     public function create()
     {
-        
         $afdeling=Afdeling::all();
         $truk=Truk::all();
         return view('pages.timbanglapangan.tambah',compact('truk','afdeling'));
@@ -41,28 +40,32 @@ class TimbangLapanganController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
            
+            'tanggal'=>'required',
+            'jam'=>'required',
+            'timbang_ke'=> 'required',
             'afdeling_id'=> 'required',
-            'truk_id'=> 'required',
-            'timbang_1'=> 'required',
-            'timbang_2'=> 'required',
-            'timbang_3'=> 'required',
-            'total_timbang_lapangan'=> 'required',
+            'penimbang'=> 'required',
+            'berat'=> 'required',
+            
         ]);
 
-        $timlap = new TimbangLapangan;
+        $timbang = new TimbangLapangan;
        
-        $timlap->afdeling_id=$request->afdeling_id;
-        $timlap->truk_id=$request->truk_id;
-        $timlap->timbang_1=$request->timbang_1;
-        $timlap->timbang_2=$request->timbang_2;
-        $timlap->timbang_3=$request->timbang_3;
-        $timlap->total_timbang_lapangan=$request->total_timbang_lapangan;
-        $timlap->save();
+        $timbang->tanggal=$request->tanggal;
+        $timbang->jam=$request->jam;
+        $timbang->timbang_ke=$request->timbang_ke;
+        $timbang->afdeling_id=$request->afdeling_id;
+        $timbang->penimbang=$request->penimbang;
+        $timbang->berat=$request->berat;
+        $timbang->save();
 
         return redirect('timbanglapangan')->with('status','Data Berhasil Ditambahkan');
+
     }
+    
 
     /**
      * Display the specified resource.
@@ -84,9 +87,9 @@ class TimbangLapanganController extends Controller
     public function edit($id)
     {
         $afdeling=Afdeling::get();
-        $truk=Truk::get();
-        $timlap = TimbangLapangan::where('id',$id)->first();
-        return view('pages.timbanglapangan.edit',compact('truk','timlap','afdeling'));
+       
+        $timbang = TimbangLapangan::where('timbangl_id',$id)->first();
+        return view('pages.timbanglapangan.edit',compact('timbang','afdeling'));
     }
 
     /**
@@ -98,20 +101,18 @@ class TimbangLapanganController extends Controller
      */
     public function update(Request $request, $id)
     {
-          
-       TimbangLapangan::where('id',$id)->update([
+        TimbangLapangan::where('timbangl_id',$id)->update([
     
-        'afdeling_id'=> $request->afdeling_id ,
-        'truk_id'=> $request->truk_id ,
-        'timbang_1'=>$request->timbang_1,
-        'timbang_2'=>$request->timbang_2,
-        'timbang_3'=>$request->timbang_3,
-        'total_timbang_lapangan'=>$request->total_timbang_lapangan,
-    ]);
+            'tanggal'=>$request->tanggal,
+            'jam'=>$request->jam,
+            'timbang_ke'=>$request->timbang_ke,
+            'afdeling_id'=> $request->afdeling_id ,
+            'berat'=>$request->berat,
+            'penimbang'=>$request->penimbang,
 
-
-
-       return redirect('timbanglapangan')->with('status','Data Berhasil Ditambahkan');
+        ]);
+    
+           return redirect('timbanglapangan')->with('status','Data Berhasil Ditambahkan');
     }
 
     /**
@@ -120,9 +121,11 @@ class TimbangLapanganController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($timbangl_id)
     {
-        TimbangLapangan::where('id',$id)->delete();
+        TimbangLapangan::where('timbangl_id',$timbangl_id)->delete();
         return back();
     }
+
+   
 }

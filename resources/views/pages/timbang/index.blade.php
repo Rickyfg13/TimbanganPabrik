@@ -20,8 +20,8 @@
           <div class="container-fluid">
             <div class="card">
               <div class="card-header">
-                <h1>Data Timbang Lapangan</h1>
-                <a href="{{ route('timbanglapangan.create') }}" class="btn btn-info">Tambah</a>
+                <h1>Data Timbang Pabrik</h1>
+                <a href="{{ route('timbang.create') }}" class="btn btn-info">Tambah</a>
       
       
               </div>
@@ -35,24 +35,28 @@
                                 <th>Jam</th>
                                 <th>Timbang Ke</th>
                                 <th>Asal Afdeling</th>
-                                <th>Nama Penimbang</th>
+                                <th>No Plat</th>
                                 <th>Berat</th>
+                                <th>Sopir</th>
+                                <th>ID Timbang Lapangan</th>
                                 <th>Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
                               @foreach ($listi as $no => $item)
                                   <tr>
-                                    <td>{{ $no+1 }}</td>
+                                    <td>{{$no+1}}</td>
                                       <td>{{$item->tanggal}}</td>
                                       <td>{{$item->jam}}</td>
                                       <td>{{$item->timbang_ke}}</td>
                                       <td>{{$item->afdeling->nama_afdeling}}</td>
-                                      <td>{{$item->penimbang}}</td>
+                                      <td>{{$item->truk->no_polisi}}</td>
                                       <td>{{$item->berat}} Kg</td>
+                                      <td>{{$item->supir}}</td>
+                                      <td>{{$item->timbanglapangan->timbangl_id}}</td>
                                       <td>
                                         {{-- Edit --}}
-                                        <a href="/timbanglapangan/{{ $item->timbangl_id }}/edit" class="btn btn-primary">
+                                        <a href="/timbang/{{ $item->timbang_id }}/edit" class="btn btn-primary">
                                                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
@@ -72,7 +76,7 @@
                                             </div>
                                             <div class="modal-body">
                             
-                                              <form action="/timbanglapangan/{{ $item->timbangl_id }}" method="post">
+                                              <form action="/timbang/{{ $item->timbang_id }}" method="post">
                                                   @csrf
                                                   @method("delete")
                                                   Apakah Anda Yakin?
@@ -95,7 +99,7 @@
                       </table>
                   <hr>
                 </div>
-                  {{-- {{ $listi->links() }} --}}
+                  {{ $listi->links() }}
                 </div>
               </div>
             </div>

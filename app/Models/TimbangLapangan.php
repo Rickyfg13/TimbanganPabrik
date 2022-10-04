@@ -2,21 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Timbang;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class TimbangLapangan extends Model
 {
     use HasFactory;
     protected $table='table_timbanglapangan';
-    protected $primaryKey = 'afdeling_id';
-    protected $fillable = [
-        
-        'timbang_1',
-        'timbang_2',
-        'timbang_3',
-        'total_timbang_pabrik',
-    ];
+    protected $primaryKey = 'timbangl_id';
+  
 
     public function truk()
     {
@@ -24,6 +19,12 @@ class TimbangLapangan extends Model
     }
     public function afdeling()
     {
-        return $this->hasOne(Afdeling::class,'afdeling_id');
+        return $this->belongsTo(Afdeling::class,'afdeling_id');
     }
+
+    public function timbanglapangan()
+    {
+        return $this->belongsTo(Timbang::class,'timbang_id');
+    }
+
 }

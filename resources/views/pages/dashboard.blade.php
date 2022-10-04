@@ -1,5 +1,9 @@
 @extends('layouts.app')
 @section('content')
+
+
+
+ 
 <!-- Preloader -->
 <div class="preloader flex-column justify-content-center align-items-center">
   <img class="animation__shake" src="{{ asset('asset/dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60" width="60">
@@ -29,21 +33,22 @@
     <section class="content">
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
+       
         <div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>{{ $truk }}</h3>
 
                 <p>Jumlah Truk</p>
               </div>
               <div class="icon"><i class="ion ion-person-add"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{route ('truk.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- ./col -->
+        
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-success">
@@ -58,30 +63,42 @@
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- ./col -->
+        
        
-          <!-- ./col -->
+        
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                <h3>{{ $afdel }}</h3>
 
                 <p>Afdeling</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{route ('afdeling.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- ./col -->
-        </div>
-        <!-- /.row -->
-        <!-- Main row -->
-       
-      </div><!-- /.container-fluid -->
+        
+          <!-- LINE CHART -->
+          {{-- <div class="card card-info">
+            <div class="card-header">
+              <h3 class="card-title">Line Chart</h3>
+              <i class="fas fa-char-line mr-1"></i>
+             
+            </div>
+            <div class="card-body">
+              <div class="chart">
+                {!! $chart->container() !!}
+              </div>
+            </div> --}}
+      </div>
     </section>
 </div>
-  <!-- /.content-wrapper -->
+<script href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/chart.min.js" charset="utf-8"></script>
+{{-- {!! $chart->script() !!} --}}
+
+
 @endsection
+
